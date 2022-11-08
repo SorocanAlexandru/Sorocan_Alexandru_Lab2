@@ -22,6 +22,11 @@ namespace Sorocan_Alexandru_Lab2.Models
         public int? PublisherID { get; set; }
         public Publisher? Publisher { get; set; }
 
+        public int? CategoryID { get; set; }
+        public Category? Category { get; set; }
+
+
+
         public ICollection<BookCategory>? BookCategories { get; set; }
 
 
