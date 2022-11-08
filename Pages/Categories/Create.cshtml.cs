@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Sorocan_Alexandru_Lab2.Data;
 using Sorocan_Alexandru_Lab2.Models;
 
-namespace Sorocan_Alexandru_Lab2.Pages.Author
+namespace Sorocan_Alexandru_Lab2.Pages.Categories
 {
     public class CreateModel : PageModel
     {
@@ -25,7 +25,7 @@ namespace Sorocan_Alexandru_Lab2.Pages.Author
         }
 
         [BindProperty]
-        public Authors Authors { get; set; }
+        public Category Category { get; set; }
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
@@ -36,7 +36,7 @@ namespace Sorocan_Alexandru_Lab2.Pages.Author
                 return Page();
             }
 
-            _context.Authors.Add(Authors);
+            _context.Category.Add(Category);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

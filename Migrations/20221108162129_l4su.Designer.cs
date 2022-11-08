@@ -12,8 +12,8 @@ using Sorocan_Alexandru_Lab2.Data;
 namespace Sorocan_Alexandru_Lab2.Migrations
 {
     [DbContext(typeof(Sorocan_Alexandru_Lab2Context))]
-    [Migration("20221030194836_ADS")]
-    partial class ADS
+    [Migration("20221108162129_l4su")]
+    partial class l4su
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace Sorocan_Alexandru_Lab2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Authors", b =>
+            modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Author", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace Sorocan_Alexandru_Lab2.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Author");
                 });
 
             modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Book", b =>
@@ -53,7 +53,7 @@ namespace Sorocan_Alexandru_Lab2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<int?>("AuthorsID")
+                    b.Property<int?>("AuthorID")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -71,11 +71,51 @@ namespace Sorocan_Alexandru_Lab2.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AuthorsID");
+                    b.HasIndex("AuthorID");
 
                     b.HasIndex("PublisherID");
 
                     b.ToTable("Book");
+                });
+
+            modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.BookCategory", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int>("BookID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("BookID");
+
+                    b.HasIndex("CategoryID");
+
+                    b.ToTable("BookCategory");
+                });
+
+            modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Category", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Publisher", b =>
@@ -97,9 +137,9 @@ namespace Sorocan_Alexandru_Lab2.Migrations
 
             modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Book", b =>
                 {
-                    b.HasOne("Sorocan_Alexandru_Lab2.Models.Authors", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorsID");
+                    b.HasOne("Sorocan_Alexandru_Lab2.Models.Author", "Author")
+                        .WithMany("Books")
+                        .HasForeignKey("AuthorID");
 
                     b.HasOne("Sorocan_Alexandru_Lab2.Models.Publisher", "Publisher")
                         .WithMany("Books")
@@ -108,6 +148,40 @@ namespace Sorocan_Alexandru_Lab2.Migrations
                     b.Navigation("Author");
 
                     b.Navigation("Publisher");
+                });
+
+            modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.BookCategory", b =>
+                {
+                    b.HasOne("Sorocan_Alexandru_Lab2.Models.Book", "Book")
+                        .WithMany("BookCategories")
+                        .HasForeignKey("BookID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Sorocan_Alexandru_Lab2.Models.Category", "Category")
+                        .WithMany("BookCategories")
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Author", b =>
+                {
+                    b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Book", b =>
+                {
+                    b.Navigation("BookCategories");
+                });
+
+            modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Category", b =>
+                {
+                    b.Navigation("BookCategories");
                 });
 
             modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Publisher", b =>

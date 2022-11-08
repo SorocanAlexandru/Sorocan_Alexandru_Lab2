@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Sorocan_Alexandru_Lab2.Data;
 using Sorocan_Alexandru_Lab2.Models;
 
-namespace Sorocan_Alexandru_Lab2.Pages.Author
+namespace Sorocan_Alexandru_Lab2.Pages.Categories
 {
     public class DetailsModel : PageModel
     {
@@ -19,23 +19,23 @@ namespace Sorocan_Alexandru_Lab2.Pages.Author
             _context = context;
         }
 
-      public Authors Authors { get; set; }
+      public Category Category { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Authors == null)
+            if (id == null || _context.Category == null)
             {
                 return NotFound();
             }
 
-            var authors = await _context.Authors.FirstOrDefaultAsync(m => m.ID == id);
-            if (authors == null)
+            var category = await _context.Category.FirstOrDefaultAsync(m => m.ID == id);
+            if (category == null)
             {
                 return NotFound();
             }
             else 
             {
-                Authors = authors;
+                Category = category;
             }
             return Page();
         }

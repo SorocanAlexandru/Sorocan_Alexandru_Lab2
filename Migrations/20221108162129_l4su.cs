@@ -4,7 +4,7 @@
 
 namespace Sorocan_Alexandru_Lab2.Migrations
 {
-    public partial class ADS : Migration
+    public partial class l4su : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sorocan_Alexandru_Lab2.Data;
 
@@ -11,9 +12,10 @@ using Sorocan_Alexandru_Lab2.Data;
 namespace Sorocan_Alexandru_Lab2.Migrations
 {
     [DbContext(typeof(Sorocan_Alexandru_Lab2Context))]
-    partial class Sorocan_Alexandru_Lab2ContextModelSnapshot : ModelSnapshot
+    [Migration("20221106123130_fd")]
+    partial class fd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

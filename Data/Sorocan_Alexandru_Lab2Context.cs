@@ -18,6 +18,8 @@ namespace Sorocan_Alexandru_Lab2.Data
 
         public DbSet<Sorocan_Alexandru_Lab2.Models.Publisher> Publisher { get; set; }
 
-        public DbSet<Sorocan_Alexandru_Lab2.Models.Authors> Authors { get; set; }
+        public DbSet<Sorocan_Alexandru_Lab2.Models.Author> Author { get; set; }
+
+        public DbSet<Sorocan_Alexandru_Lab2.Models.Category> Category { get; set; }
     }
 }

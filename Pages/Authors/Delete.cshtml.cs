@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Sorocan_Alexandru_Lab2.Data;
 using Sorocan_Alexandru_Lab2.Models;
 
-namespace Sorocan_Alexandru_Lab2.Pages.Author
+namespace Sorocan_Alexandru_Lab2.Pages.Authors
 {
     public class DeleteModel : PageModel
     {
@@ -20,40 +20,40 @@ namespace Sorocan_Alexandru_Lab2.Pages.Author
         }
 
         [BindProperty]
-      public Authors Authors { get; set; }
+      public Author Author { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Authors == null)
+            if (id == null || _context.Author == null)
             {
                 return NotFound();
             }
 
-            var authors = await _context.Authors.FirstOrDefaultAsync(m => m.ID == id);
+            var author = await _context.Author.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (authors == null)
+            if (author == null)
             {
                 return NotFound();
             }
             else 
             {
-                Authors = authors;
+                Author = author;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Authors == null)
+            if (id == null || _context.Author == null)
             {
                 return NotFound();
             }
-            var authors = await _context.Authors.FindAsync(id);
+            var author = await _context.Author.FindAsync(id);
 
-            if (authors != null)
+            if (author != null)
             {
-                Authors = authors;
-                _context.Authors.Remove(Authors);
+                Author = author;
+                _context.Author.Remove(Author);
                 await _context.SaveChangesAsync();
             }
 
