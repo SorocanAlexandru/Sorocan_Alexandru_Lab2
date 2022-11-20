@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sorocan_Alexandru_Lab2.Data;
 
@@ -11,9 +12,10 @@ using Sorocan_Alexandru_Lab2.Data;
 namespace Sorocan_Alexandru_Lab2.Migrations
 {
     [DbContext(typeof(Sorocan_Alexandru_Lab2Context))]
-    partial class Sorocan_Alexandru_Lab2ContextModelSnapshot : ModelSnapshot
+    [Migration("20221120175332_Borr+Mem")]
+    partial class BorrMem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,32 +106,6 @@ namespace Sorocan_Alexandru_Lab2.Migrations
                     b.ToTable("BookCategory");
                 });
 
-            modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Borrowing", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<int?>("BookID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MemberID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ReturnDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("BookID");
-
-                    b.HasIndex("MemberID");
-
-                    b.ToTable("Borrowing");
-                });
-
             modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Category", b =>
                 {
                     b.Property<int>("ID")
@@ -145,35 +121,6 @@ namespace Sorocan_Alexandru_Lab2.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Category");
-                });
-
-            modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Member", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("Adress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Member");
                 });
 
             modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Publisher", b =>
@@ -233,21 +180,6 @@ namespace Sorocan_Alexandru_Lab2.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Borrowing", b =>
-                {
-                    b.HasOne("Sorocan_Alexandru_Lab2.Models.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookID");
-
-                    b.HasOne("Sorocan_Alexandru_Lab2.Models.Member", "Member")
-                        .WithMany("Borrowings")
-                        .HasForeignKey("MemberID");
-
-                    b.Navigation("Book");
-
-                    b.Navigation("Member");
-                });
-
             modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Author", b =>
                 {
                     b.Navigation("Books");
@@ -261,11 +193,6 @@ namespace Sorocan_Alexandru_Lab2.Migrations
             modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Category", b =>
                 {
                     b.Navigation("BookCategories");
-                });
-
-            modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Member", b =>
-                {
-                    b.Navigation("Borrowings");
                 });
 
             modelBuilder.Entity("Sorocan_Alexandru_Lab2.Models.Publisher", b =>
