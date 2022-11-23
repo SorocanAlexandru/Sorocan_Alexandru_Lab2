@@ -39,7 +39,7 @@ namespace Sorocan_Alexandru_Lab2.Areas.Identity.Pages.Account
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            Sorocan_Alexandru_Lab2.Data.Sorocan_Alexandru_Lab2Context context)
+            Data.Sorocan_Alexandru_Lab2Context context)
         {
             _userManager = userManager;
             _userStore = userStore;
